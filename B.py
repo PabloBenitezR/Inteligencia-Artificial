@@ -10,15 +10,14 @@ screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Frozen Lake Q-Learning Agent")
 
 # Cargar imágenes y escalarlas al tamaño de la celda
-start_img = pygame.transform.scale(pygame.image.load("imagen\stool.png"), (cell_size, cell_size))
-stool_img = pygame.transform.scale(pygame.image.load("imagen\stool.png"), (cell_size, cell_size))
-goal_img = pygame.transform.scale(pygame.image.load("imagen\goal.png"), (cell_size, cell_size))
-hole_img = pygame.transform.scale(pygame.image.load("imagen\hole.png"), (cell_size, cell_size))
-frozen_img = pygame.transform.scale(pygame.image.load("imagen\ice.png"), (cell_size, cell_size))
-agent_img_up = pygame.transform.scale(pygame.image.load("imagen\elf_up.png"), (cell_size, cell_size))
-agent_img_down = pygame.transform.scale(pygame.image.load("imagen\elf_down.png"), (cell_size, cell_size))
-agent_img_left = pygame.transform.scale(pygame.image.load("imagen\elf_left.png"), (cell_size, cell_size))
-agent_img_right = pygame.transform.scale(pygame.image.load("imagen\elf_right.png"), (cell_size, cell_size))
+start_img = pygame.transform.scale(pygame.image.load("stool.png"), (cell_size, cell_size))
+goal_img = pygame.transform.scale(pygame.image.load("goal.png"), (cell_size, cell_size))
+hole_img = pygame.transform.scale(pygame.image.load("hole.png"), (cell_size, cell_size))
+frozen_img = pygame.transform.scale(pygame.image.load("ice.png"), (cell_size, cell_size))
+agent_img_up = pygame.transform.scale(pygame.image.load("elf_up.png"), (cell_size, cell_size))
+agent_img_down = pygame.transform.scale(pygame.image.load("elf_down.png"), (cell_size, cell_size))
+agent_img_left = pygame.transform.scale(pygame.image.load("elf_left.png"), (cell_size, cell_size))
+agent_img_right = pygame.transform.scale(pygame.image.load("elf_right.png"), (cell_size, cell_size))
 
 
 
@@ -73,7 +72,7 @@ class FrozenLake:
                     screen.blit(hole_img, (x, y))  # Agujero
 
                 elif (i, j) == env.start_state:
-                    screen.blit(stool_img, (x, y))
+                    screen.blit(start_img, (x, y))
 
                 elif (i, j) == env.goal_state:
                     screen.blit(goal_img, (x, y))  # Meta

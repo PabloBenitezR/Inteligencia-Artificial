@@ -10,17 +10,15 @@ width, height = 4 * cell_size, 4 * cell_size
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Frozen Lake Q-Learning Agent")
 
-# Cargar imágenes de celdas y agente
-start_img = pygame.transform.scale(pygame.image.load(r"C:\Users\ST\Desktop\Tareas Master\Inteligencia Artifical\Entregar IA-5\imagen\stool.png"), (cell_size, cell_size))
-stool_img = pygame.transform.scale(pygame.image.load(r"C:\Users\ST\Desktop\Tareas Master\Inteligencia Artifical\Entregar IA-5\imagen\stool.png"), (cell_size, cell_size))
-goal_img = pygame.transform.scale(pygame.image.load(r"C:\Users\ST\Desktop\Tareas Master\Inteligencia Artifical\Entregar IA-5\imagen\goal.png"), (cell_size, cell_size))
-hole_img = pygame.transform.scale(pygame.image.load(r"C:\Users\ST\Desktop\Tareas Master\Inteligencia Artifical\Entregar IA-5\imagen\hole.png"), (cell_size, cell_size))
-frozen_img = pygame.transform.scale(pygame.image.load(r"C:\Users\ST\Desktop\Tareas Master\Inteligencia Artifical\Entregar IA-5\imagen\ice.png"), (cell_size, cell_size))
-agent_img_up = pygame.transform.scale(pygame.image.load(r"C:\Users\ST\Desktop\Tareas Master\Inteligencia Artifical\Entregar IA-5\imagen\elf_up.png"), (cell_size, cell_size))
-agent_img_down = pygame.transform.scale(pygame.image.load(r"C:\Users\ST\Desktop\Tareas Master\Inteligencia Artifical\Entregar IA-5\imagen\elf_down.png"), (cell_size, cell_size))
-agent_img_left = pygame.transform.scale(pygame.image.load(r"C:\Users\ST\Desktop\Tareas Master\Inteligencia Artifical\Entregar IA-5\imagen\elf_left.png"), (cell_size, cell_size))
-agent_img_right = pygame.transform.scale(pygame.image.load(r"C:\Users\ST\Desktop\Tareas Master\Inteligencia Artifical\Entregar IA-5\imagen\elf_right.png"), (cell_size, cell_size))
-
+# Cargar imágenes y escalarlas al tamaño de la celda
+start_img = pygame.transform.scale(pygame.image.load("stool.png"), (cell_size, cell_size))
+goal_img = pygame.transform.scale(pygame.image.load("goal.png"), (cell_size, cell_size))
+hole_img = pygame.transform.scale(pygame.image.load("hole.png"), (cell_size, cell_size))
+frozen_img = pygame.transform.scale(pygame.image.load("ice.png"), (cell_size, cell_size))
+agent_img_up = pygame.transform.scale(pygame.image.load("elf_up.png"), (cell_size, cell_size))
+agent_img_down = pygame.transform.scale(pygame.image.load("elf_down.png"), (cell_size, cell_size))
+agent_img_left = pygame.transform.scale(pygame.image.load("elf_left.png"), (cell_size, cell_size))
+agent_img_right = pygame.transform.scale(pygame.image.load("elf_right.png"), (cell_size, cell_size))
 # Definición de la clase de entorno FrozenLake
 class FrozenLake:
     def __init__(self, size=4):
@@ -73,7 +71,7 @@ class FrozenLake:
                     screen.blit(hole_img, (x, y))  # Agujero
 
                 elif (i, j) == env.start_state:
-                    screen.blit(stool_img, (x, y))
+                    screen.blit(start_img, (x, y)) # Inicio
 
                 elif (i, j) == env.goal_state:
                     screen.blit(goal_img, (x, y))  # Meta
@@ -81,7 +79,7 @@ class FrozenLake:
                 if (i, j) == env.current_state:
                     screen.blit(agent_img_down, (x, y))  # Agente
         
-        # Dibujar el agente
+        
         agent_x, agent_y = self.current_state[1] * cell_size, self.current_state[0] * cell_size
         screen.blit(agent_img_down, (agent_x, agent_y))
         pygame.display.flip()

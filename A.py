@@ -84,13 +84,13 @@ class FrozenLake:
                     print('NULL')
             print()
 
-# Create the environment
+# Ambiente
 env = FrozenLake()
 
-# Initialize Q-table with zeros
+# Q-tabla con 0's
 q_tabla = np.zeros((env.size, env.size, 4))
 
-# hiperparamentros
+# hiperparámetros
 num_episodes = 10000
 max_steps_per_episode = 100
 learning_rate = 0.1
@@ -99,14 +99,14 @@ epsilon = 1.0
 min_epsilon = 0.01
 epsilon_decay_rate = 0.001
 
-# 
+# política
 def egreedy_poli(state):
     if random.uniform(0, 1) < epsilon:
         return random.randint(0, 3)
     else:
         return np.argmax(q_tabla[state[0]][state[1]])
 
-# Train the agent
+# Entrenamiento del agente
 for episode in range(num_episodes):
     state = env.reset()
     done = False
@@ -120,41 +120,41 @@ for episode in range(num_episodes):
         t += 1
     epsilon = max(min_epsilon, epsilon * (1 - epsilon_decay_rate))
 
-    # Show progress
+    # Ver el progreso cada 1000 episodios para contar un total de 10000 episodios
     if episode % 1000 == 0:
         print(f"Episodio {episode}")
         env.render()
         env.show_q_tabla(q_tabla)
 
-# Function to run the learned policy
+# Después el agente corre lo aprendido con la política de selección ya entrenada
 def run_learned_policy(env, q_tabla):
-    state = env.reset()  # Start from the initial position
+    state = env.reset() 
     done = False
     steps = 0
 
     print("\nEl agente está corriendo lo aprendido..\n")
-    env.render()  # Display the initial state
+    env.render()  
 
     while not done:
-        action = np.argmax(q_tabla[state[0]][state[1]])  # Choose the best action (highest Q value)
+        action = np.argmax(q_tabla[state[0]][state[1]])  # escogiendo el mejor valor de la Q-tabla
         next_state, reward, done = env.step(action)
 
-        # Render the environment after each move
+        
         env.render()
 
-        # Show the current step, state, and action taken
+       
         print(f"Paso {steps + 1}: Estado {state} -> Acción {['UP', 'DOWN', 'LEFT', 'RIGHT'][action]}")
 
-        # Update the current state
+        
         state = next_state
         steps += 1
 
         if done:
             if reward == 1:
-                print("\n¡El agente llego al regalo!")
+                print("\n¡El agente llegó al regalo!")
             else:
                 print("\n¡El agente se cayó en un hoyo!")
             break
 
-# Run the learned policy after training
+
 run_learned_policy(env, q_tabla)
